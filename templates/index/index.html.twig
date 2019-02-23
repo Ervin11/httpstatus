@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+
+<h1 class="title_index">Websites Status</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">URL</th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for website in websites %}
+        <tr class="table-primary">
+            <th scope="row">{{ website.id }}</th>
+            <td>{{ website.url }}</td>
+            <td>Date</td>
+            <td>200</td>
+            <td class="button_show"><button type="button" class="btn btn-secondary"><a href="{{ path('show') }}">Show</a></button></td>
+            <td class="button_history"><button type="button" class="btn btn-secondary"><a href="{{ path('history') }}">History</a></button></td>
+            <td class="button_delete"><button type="button" class="btn btn-secondary"><a href="{{ path('show') }}">Delete</a></button></td>
+        </tr>
+    {% endfor %}
+        
+    </tbody>
+</table>
+
+{% endblock %}

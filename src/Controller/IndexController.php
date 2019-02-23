@@ -40,6 +40,27 @@ class IndexController extends AbstractController
         ]);
     }
 
+
+
+    /**
+     * @Route("/delete/{id}", name="delete")
+     */
+/*
+    public function delete(Request $request, ObjectManager $manager)
+    {
+
+            $websites->remove($id);
+            $manager->flush();
+
+        //$websites = $this->getDoctrine()->getRepository(Websites::class)->find($id);
+//        $doctrine = $this->getDoctrine()->getManager();
+  //      $doctrine->remove($id);
+    //    $doctrine->flush();
+        return $this->render('index/add.html.twig');
+
+    }
+
+*/
     /**
      * @Route("/history", name="history")
      */

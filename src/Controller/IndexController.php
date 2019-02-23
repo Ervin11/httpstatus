@@ -17,7 +17,7 @@ class IndexController extends AbstractController
      */
 
     public function index(WebsitesRepository $repo)
-    {   
+    {
         $websites = $repo->findAll();
 
         return $this->render('index/index.html.twig', [
@@ -27,12 +27,17 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/show/12", name="show")
+     * @Route("/show/{id}", name="show")
      */
 
-    public function show()
+    public function show(Websites $website)
     {
-        return $this->render('index/show.html.twig');
+
+        return $this->render('index/show.html.twig', [
+          'website' => $website
+
+
+        ]);
     }
 
     /**

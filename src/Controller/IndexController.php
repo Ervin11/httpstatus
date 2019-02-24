@@ -19,7 +19,7 @@ class IndexController extends AbstractController
      */
 
     public function index(WebsitesRepository $repo)
-    {   
+    {
         $websites = $repo->findAll();
 
         return $this->render('index/index.html.twig', [
@@ -29,14 +29,40 @@ class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/show/12", name="show")
+     * @Route("/show/{id}", name="show")
      */
 
-    public function show()
+    public function show(Websites $website)
     {
-        return $this->render('index/show.html.twig');
+
+        return $this->render('index/show.html.twig', [
+          'website' => $website
+
+
+        ]);
     }
 
+
+
+    /**
+     * @Route("/delete/{id}", name="delete")
+     */
+/*
+    public function delete(Request $request, ObjectManager $manager)
+    {
+
+            $websites->remove($id);
+            $manager->flush();
+
+        //$websites = $this->getDoctrine()->getRepository(Websites::class)->find($id);
+//        $doctrine = $this->getDoctrine()->getManager();
+  //      $doctrine->remove($id);
+    //    $doctrine->flush();
+        return $this->render('index/add.html.twig');
+
+    }
+
+*/
     /**
      * @Route("/history", name="history")
      */

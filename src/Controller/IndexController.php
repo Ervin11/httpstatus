@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use App\Entity\Websites;
 use App\Repository\WebsitesRepository;
+use App\Entity\Status;
+use App\Repository\StatusRepository;
 
 
 class IndexController extends AbstractController
@@ -51,12 +53,30 @@ class IndexController extends AbstractController
     public function add(Request $request, ObjectManager $manager)
     {
 
+        $repoWebsite = $this->getDoctrine()->getRepository(Websites::class);
+
         if ($request->request->count() > 0)
         {
             $websites = new Websites();
             $websites->setUrl($request->request->get('url'));
 
+            $sites = $websites->getUrl($request->request->get('url'));
+
+            $status = new Status();
+
+            // print_r(get_headers($sites));
+
+            $header = get_headers($sites);
+
+            $yo = substr($header[0], 9, 3);
+            $yop = substr($header[1], 6, 26);
+
+            print($yop);
+
+            $status->setSite($websites);
+
             $manager->persist($websites);
+            $manager->persist($status);
             $manager->flush();
         }
 

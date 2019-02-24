@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -34,7 +36,17 @@ class Websites
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $historyStatus;
+    private $historyUrl;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Status", mappedBy="site")
+     */
+    private $statuses;
+
+    public function __construct()
+    {
+        $this->statuses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -77,14 +89,45 @@ class Websites
         return $this;
     }
 
-    public function getHistoryStatus(): ?string
+    public function getHistoryUrl(): ?string
     {
-        return $this->historyStatus;
+        return $this->historyUrl;
     }
 
-    public function setHistoryStatus(?string $historyStatus): self
+    public function setHistoryUrl(?string $historyUrl): self
     {
-        $this->historyStatus = $historyStatus;
+        $this->historyUrl = $historyUrl;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Status[]
+     */
+    public function getStatuses(): Collection
+    {
+        return $this->statuses;
+    }
+
+    public function addStatus(Status $status): self
+    {
+        if (!$this->statuses->contains($status)) {
+            $this->statuses[] = $status;
+            $status->setSite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatus(Status $status): self
+    {
+        if ($this->statuses->contains($status)) {
+            $this->statuses->removeElement($status);
+            // set the owning side to null (unless already changed)
+            if ($status->getSite() === $this) {
+                $status->setSite(null);
+            }
+        }
 
         return $this;
     }

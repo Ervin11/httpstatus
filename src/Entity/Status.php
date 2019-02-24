@@ -17,17 +17,18 @@ class Status
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Websites")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Websites", inversedBy="statuses")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $site;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $code;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $date;
 
@@ -53,7 +54,7 @@ class Status
         return $this->code;
     }
 
-    public function setCode(int $code): self
+    public function setCode(?int $code): self
     {
         $this->code = $code;
 
@@ -65,7 +66,7 @@ class Status
         return $this->date;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setDate(?\DateTimeInterface $date): self
     {
         $this->date = $date;
 

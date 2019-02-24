@@ -24,17 +24,17 @@ class Websites
     private $url;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $deleteUrl;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $statusUrl;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="text")
      */
     private $historyUrl;
 
@@ -70,7 +70,7 @@ class Websites
         return $this->deleteUrl;
     }
 
-    public function setDeleteUrl(?string $deleteUrl): self
+    public function setDeleteUrl(string $deleteUrl): self
     {
         $this->deleteUrl = $deleteUrl;
 
@@ -82,7 +82,7 @@ class Websites
         return $this->statusUrl;
     }
 
-    public function setStatusUrl(?string $statusUrl): self
+    public function setStatusUrl(string $statusUrl): self
     {
         $this->statusUrl = $statusUrl;
 
@@ -94,7 +94,7 @@ class Websites
         return $this->historyUrl;
     }
 
-    public function setHistoryUrl(?string $historyUrl): self
+    public function setHistoryUrl(string $historyUrl): self
     {
         $this->historyUrl = $historyUrl;
 

@@ -23,12 +23,12 @@ class Status
     private $site;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="integer")
      */
     private $code;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $date;
 
@@ -54,7 +54,7 @@ class Status
         return $this->code;
     }
 
-    public function setCode(?int $code): self
+    public function setCode(int $code): self
     {
         $this->code = $code;
 
@@ -66,7 +66,7 @@ class Status
         return $this->date;
     }
 
-    public function setDate(?string $date): self
+    public function setDate(string $date): self
     {
         $this->date = $date;
 

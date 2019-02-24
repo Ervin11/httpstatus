@@ -11,8 +11,6 @@
         <tr>
             <th scope="col">ID</th>
             <th scope="col">URL</th>
-            <th scope="col">Date</th>
-            <th scope="col">Status</th>
             <th scope="col"></th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -23,8 +21,6 @@
         <tr class="table-primary">
             <th scope="row">{{ website.id }}</th>
             <td>{{ website.url }}</td>
-            <td></td>
-            <td></td>
             <td class="button_show"><button type="button" class="btn btn-secondary"><a href="{{ path('show', {'id': website.id}) }}">Show</a></button></td>
             <td class="button_history"><button type="button" class="btn btn-secondary"><a href="{{ path('history') }}">History</a></button></td>
             <td class="button_delete"><button type="button" class="btn btn-secondary"><a href="{{ path('delete', {'id': website.id}) }}">Delete</a></button></td>

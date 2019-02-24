@@ -19,9 +19,17 @@
         <tr class="table-primary">
             <td>{{ websites.id }}</td>
             <td>{{ websites.url }}</td>
-            <td>Date</td>
-            <td>200</td>
+            <td>{{ status.date }}</td>
+            <td>{{ status.code }}</td>
         </tr>
+    </tbody>
+    <tbody>
+    {% for stats in status %}
+         <tr class="table-primary">
+            <td>{{ stats.site }}</td>
+            <td>{{ stats.code }}</td>
+        </tr>
+    {% endfor %}
     </tbody>
 </table>
 

@@ -21,8 +21,8 @@ class IndexController extends AbstractController
     public function index(WebsitesRepository $repo)
     {   
         $websites = $repo->findAll();
-
-        print_r(gettype($websites));
+                
+        // dump($websites);
 
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
@@ -34,10 +34,19 @@ class IndexController extends AbstractController
      * @Route("/show/{id}", name="show")
      */
 
-    public function show(Websites $websites)
-    {
+    public function show(Websites $websites, $id)
+    {   
+        $site = $id;
+
+        $status = $this->getDoctrine()->getRepository(Status::class)->find($site);
+        
+        // $websites->getStatuses();
+        
+        dump($status);
+
         return $this->render('index/show.html.twig', [
-            'websites' => $websites
+            'websites' => $websites,
+            'status' => $status
         ]);
     }
 
@@ -50,8 +59,8 @@ class IndexController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $website = $em->getRepository(Websites::class)->find($id);
-        $site = $id;
-        $status = $em->getRepository(Status::class)->find($site);
+        $sites = $id;
+        $status = $em->getRepository(Status::class)->find($sites);
 
         if (!$website) {
             return $this->redirectToRoute('index');
@@ -106,6 +115,8 @@ class IndexController extends AbstractController
             $manager->persist($websites);
             $manager->persist($status);
             $manager->flush();
+
+
         }
 
         return $this->render('index/add.html.twig');

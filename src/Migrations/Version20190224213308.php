@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20190223190851 extends AbstractMigration
+final class Version20190224213308 extends AbstractMigration
 {
     public function getDescription() : string
     {
@@ -22,8 +22,8 @@ final class Version20190223190851 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('CREATE TABLE status (id INT AUTO_INCREMENT NOT NULL, site_id INT DEFAULT NULL, code INT NOT NULL, date DATETIME NOT NULL, INDEX IDX_7B00651CF6BD1646 (site_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE websites (id INT AUTO_INCREMENT NOT NULL, url LONGTEXT NOT NULL, delete_url LONGTEXT DEFAULT NULL, status_url LONGTEXT DEFAULT NULL, history_status LONGTEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE status (id INT AUTO_INCREMENT NOT NULL, site_id INT NOT NULL, code INT NOT NULL, date VARCHAR(255) NOT NULL, INDEX IDX_7B00651CF6BD1646 (site_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE websites (id INT AUTO_INCREMENT NOT NULL, url LONGTEXT NOT NULL, delete_url LONGTEXT NULL, status_url LONGTEXT NULL, history_url LONGTEXT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
         $this->addSql('ALTER TABLE status ADD CONSTRAINT FK_7B00651CF6BD1646 FOREIGN KEY (site_id) REFERENCES websites (id)');
     }
 

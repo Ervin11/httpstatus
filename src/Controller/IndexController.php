@@ -19,8 +19,10 @@ class IndexController extends AbstractController
      */
 
     public function index(WebsitesRepository $repo)
-    {
+    {   
         $websites = $repo->findAll();
+
+        print_r(gettype($websites));
 
         return $this->render('index/index.html.twig', [
             'controller_name' => 'IndexController',
@@ -32,37 +34,37 @@ class IndexController extends AbstractController
      * @Route("/show/{id}", name="show")
      */
 
-    public function show(Websites $website)
+    public function show(Websites $websites)
     {
-
         return $this->render('index/show.html.twig', [
-          'website' => $website
-
-
+            'websites' => $websites
         ]);
     }
-
-
 
     /**
      * @Route("/delete/{id}", name="delete")
      */
-/*
-    public function delete(Request $request, ObjectManager $manager)
+
+    public function delete($id)
     {
+        $em = $this->getDoctrine()->getManager();
 
-            $websites->remove($id);
-            $manager->flush();
+        $website = $em->getRepository(Websites::class)->find($id);
+        $site = $id;
+        $status = $em->getRepository(Status::class)->find($site);
 
-        //$websites = $this->getDoctrine()->getRepository(Websites::class)->find($id);
-//        $doctrine = $this->getDoctrine()->getManager();
-  //      $doctrine->remove($id);
-    //    $doctrine->flush();
-        return $this->render('index/add.html.twig');
+        if (!$website) {
+            return $this->redirectToRoute('index');
+        }
 
+        $em->remove($website);
+        $em->remove($status);
+        $em->flush();
+
+        return $this->redirectToRoute('index');
+        
     }
 
-*/
     /**
      * @Route("/history", name="history")
      */
@@ -85,7 +87,7 @@ class IndexController extends AbstractController
         {
             $websites = new Websites();
             $websites->setUrl($request->request->get('url'));
-
+ 
             $sites = $websites->getUrl($request->request->get('url'));
 
             $status = new Status();
@@ -94,12 +96,12 @@ class IndexController extends AbstractController
 
             $header = get_headers($sites);
 
-            $yo = substr($header[0], 9, 3);
-            $yop = substr($header[1], 6, 26);
+            $code = substr($header[0], 9, 3);
+            $date = substr($header[1], 6, 26);
 
-            print($yop);
-
-            $status->setSite($websites);
+            $status->setSite($websites)
+                   ->setCode($code)
+                   ->setDate($date);
 
             $manager->persist($websites);
             $manager->persist($status);

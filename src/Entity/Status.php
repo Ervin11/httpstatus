@@ -28,7 +28,7 @@ class Status
     private $code;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $date;
 
@@ -61,12 +61,12 @@ class Status
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?string
     {
         return $this->date;
     }
 
-    public function setDate(?\DateTimeInterface $date): self
+    public function setDate(?string $date): self
     {
         $this->date = $date;
 

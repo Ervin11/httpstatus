@@ -13,16 +13,14 @@
             <th scope="col">URL</th>
             <th scope="col">Date</th>
             <th scope="col">Status</th>
-            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
         <tr class="table-primary">
-            <td>{{ website.id }}</td>
-            <td>{{ website.url }}</td>
+            <td>{{ websites.id }}</td>
+            <td>{{ websites.url }}</td>
             <td>Date</td>
             <td>200</td>
-            <td class="button_show"><button type="button" class="btn btn-secondary"><a href="{{ path('show', {'id': website.id}) }}">Edit</a></button></td>
         </tr>
     </tbody>
 </table>

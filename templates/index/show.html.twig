@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Site n°{% endblock %}
+{% block title %}Site n° {{ websites.id }}{% endblock %}
 
 {% block body %}
 
-<h1 class="title_index">Website Title</h1>
+<h1 class="title_index">{{ websites.url }}</h1>
 
 <table class="table">
     <thead>
@@ -33,10 +33,5 @@
     </tbody>
 </table>
 
-<?php
-$url = 'https://www.google.com';
-
-print_r(get_headers($url));
-?>
 
 {% endblock %}
